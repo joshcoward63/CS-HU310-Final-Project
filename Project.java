@@ -1,3 +1,4 @@
+import java.sql.*;
 
 public class Project {
 	/*
@@ -5,10 +6,76 @@ public class Project {
 	 *
 	 */
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException,SQLException{
+		/*
+		 * things to set up database conection
+		 */
+		Connection connection = null;
+		String database = "whatever we name it";
+		int port = 0;//port number
+		String userName = "whatever the name is";
+		String password = "the pass";
+		Class.forName("com.mysql.jdbc.Driver");
+		connection = DriverManager.getConnection("url");
+		connection.setAutoCommit(false);
+		Statement statement = connection.createStatement();
+		statement.executeUpdate("use " + database);
+		
+		/*
+		 * 
+		 *conditionals
+		 */
+		
+		
+		if(statement != null) {
+			statement.close();
+		}
+		
+		
 		if(args[0] == "/?") {
 			Usage();
 		}
+		else if(args[0].toLowerCase() == "createitem") {
+			createItem(Integer.parseInt(args[1]), args[2], Double.parseDouble(args[3]));
+			java.sql.Statement stmt;
+			stmt =connection.createStatement();
+			String sqlstmt = "insert into Items( ";
+			ResultSet set = stmt.executeQuery(sqlstmt);
+		}
+		else if(args[0].toLowerCase() == "createpurchase") {
+			createPurchase(Integer.parseInt(args[1]),Integer.parseInt(args[2]));
+		}
+		else if(args[0].toLowerCase() == "createshipment") {
+
+		}
+		else if(args[0].toLowerCase() == "getitems") {
+			
+		}
+		else if(args[0].toLowerCase() == "getshipment") {
+
+		}
+		else if(args[0].toLowerCase() == "getpurchase") {
+			
+		}
+		else if(args[0].toLowerCase() == "itemsavailable") {
+			
+		}
+		else if(args[0].toLowerCase() == "updateitem") {
+			
+		}
+		else if(args[0].toLowerCase() == "deleteitem") {
+			
+		}
+		else if(args[0].toLowerCase() == "deletepurchase") {
+			
+		}
+		else if(args[0].toLowerCase() == "deleteshipment") {
+			
+		}
+		else {
+			Usage();
+		}
+
 	}
 
 	public static void Usage() {
@@ -46,10 +113,10 @@ public class Project {
 				+ " DeleteShipment <itemCode> "
 				);
 	}
-	public void createItem(int iCode,String desc, double price) {
+	public static void createItem(int iCode,String desc, double price) {
 
 	}
-	public void createPurchase(int pCode, int quantity) {
+	public static void createPurchase(int pCode, int quantity) {
 
 	}
 	public void createShipment(int sCode,int shipQ, int shipDate) {
