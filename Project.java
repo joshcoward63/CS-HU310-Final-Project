@@ -172,10 +172,10 @@ public class Project {
 	public void updateItem(int ICode, double price) {	
 	}
 	public String deleteItem(int iCode) {
-		String deleteItem = "DELETE FROM Item where"  + ICode + ";";
+		String deleteItem = "DELETE FROM Item where"  + iCode + ";";
 		return deleteItem;
 	}
-	public String deletePurchase(int pcode) {
+	public String deletePurchase(int pCode) {
 		String deletePurchase = "DELETE FROM Purchase where"  + pCode + ";";
 		return deletePurchase;
 	}
