@@ -22,26 +22,24 @@ public class Project {
 				*conditionals
 				*/				
 				if(selectStmt != null) {
-					statement.close();
+					selectStmt.close();
 				}		
 				
 				if(args[0] == "/?") {
 					Usage();
 				}
 				else if(args[0].toLowerCase() == "createitem") {
-					createItem(Integer.parseInt(args[1]), args[2], Double.parseDouble(args[3]));
-					java.sql.Statement stmt;
-					stmt =connection.createStatement();
-					String sqlstmt = "insert into Items( ";
-					ResultSet set = stmt.executeQuery(sqlstmt);
+				runQuery(conn,createItem(Integer.parseInt(args[1]), args[2], Double.parseDouble(args[3])));
+					
 				}
 				else if(args[0].toLowerCase() == "createpurchase") {
-					createPurchase(Integer.parseInt(args[1]),Integer.parseInt(args[2]));
+					runQuery(conn,createPurchase(Integer.parseInt(args[1]),Integer.parseInt(args[2])));
 				}
 				else if(args[0].toLowerCase() == "createshipment") {
-
+					runQuery(conn,createShipment(Integer.parseInt(args[1]),Integer.parseInt(args[2]),Integer.parseInt(args[3])));
 				}
 				else if(args[0].toLowerCase() == "getitems") {
+					runQuery(conn,getItems(Integer.parseInt(args[1])));
 					
 				}
 				else if(args[0].toLowerCase() == "getshipment") {
@@ -141,6 +139,45 @@ public class Project {
 		}
 	}
 
+	
+	public static String createItem(int iCode,String desc, double price) {
+		String stmnt = "Insert into Item(itemCode,itemDescription, price"
+				+ " Values ( " + iCode + ", " + desc + ", " + price +" );";
+		return stmnt;
+			
+	}
+	public static String createPurchase(int pCode, int quantity) {
+		String stmnt = "Insert into Purchases(purchaseCode,Quantity) "
+				+ "Values (" + pCode + ", " + quantity + ");";
+		return stmnt;
+	}
+	public static String createShipment(int sCode,int shipQ, int shipDate) {
+		String stmnt = " ";
+		return stmnt;
+		
+	}
+	public static String getItems(int iCode) {
+		String stmnt = "Select itemCode from Items where code = \' " + iCode + "\' "; 
+		return stmnt;
+	}
+	public String getShipments(int sCode) {
+		return null;
+	}
+	public String getPurchases(int pCode) {
+		return null;
+	}
+	public String itemsAvailable(int Code) {
+		return null;
+	}
+	public void updateItem(int ICode, double price) {	
+	}
+	public void deleteItem(int iCode) {
+	}
+	public void deletePurchase(int pcode) {
+	}
+	public void deleteShipment(int sCode) {
+	}
+
 	public static void Usage() {
 		System.out.println("USAGE:\nFOR Create items\n "
 				+ " CreateItem <itemCode> <itemDescription> <price>\n"
@@ -176,40 +213,4 @@ public class Project {
 				+ " DeleteShipment <itemCode> "
 				);
 	}
-	public static void createItem(int iCode,String desc, double price) {
-
-	}
-	public static void createPurchase(int pCode, int quantity) {
-
-	}
-	public void createShipment(int sCode,int shipQ, int shipDate) {
-
-	}
-	public Object getItems(int iCode) {
-		return null;
-	}
-	public Object getShipments(int sCode) {
-		return null;
-	}
-	public Object getPurchases(int pCode) {
-		return null;
-	}
-	public Object itemsAvailable(int Code) {
-		return null;
-	}
-	public void updateItem(int ICode, double price) {	
-	}
-	public String deleteItem(int iCode) {
-		String deleteItem = "DELETE FROM Item where"  + ICode + ";";
-		return deleteItem;
-	}
-	public String deletePurchase(int pcode) {
-		String deletePurchase = "DELETE FROM Purchase where"  + pCode + ";";
-		return deletePurchase;
-	}
-	public String deleteShipment(int sCode) {
-		String deleteShipment = "DELETE FROM Shipment where"  + sCode + ";";
-		return deleteShipment;
-	}
-
 }
