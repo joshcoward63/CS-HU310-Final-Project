@@ -17,7 +17,7 @@ public class Project {
 			Class.forName("com.mysql.cj.jdbc.Driver").getConstructor().newInstance();
 			System.out.println();
 			System.out.println("JDBC driver loaded");
-			conn = makeConnection("58120", "db1","2444666668888888");    
+			conn = makeConnection("58120", "CS310","1234567890");    
 			/*
 			 * 
 			 *conditionals
