@@ -50,7 +50,7 @@ public class Project {
 					System.out.println("Error in argument numbers");
 					Usage();
 					return;
-					
+
 				}
 				runQuery(conn,createPurchase(Integer.parseInt(args[1]),Integer.parseInt(args[2])));
 			}
@@ -68,8 +68,11 @@ public class Project {
 					Usage();
 					return;
 				}
+				if(args[1] == "%") {
+					runQuery(conn,"select * from Item;");
+				}
 				runQuery(conn,getItems(Integer.parseInt(args[1])));
-				
+
 
 			}
 			else if(args[0].toLowerCase() == "getshipments") {
@@ -78,6 +81,9 @@ public class Project {
 					Usage();
 					return;
 				}
+				if(args[1] == "%") {
+					runQuery(conn,"select * from Shipping;");
+				}
 				runQuery(conn,getShipments(Integer.parseInt(args[1])));
 			}
 			else if(args[0].toLowerCase() == "getpurchase") {
@@ -85,6 +91,9 @@ public class Project {
 					System.out.println("Error in argument numbers");
 					Usage();
 					return;
+				}
+				if(args[1] == "%") {
+					runQuery(conn,"select * from Purchase;");
 				}
 				runQuery(conn,getShipments(Integer.parseInt(args[1])));
 
