@@ -30,7 +30,6 @@ public class Project {
 			 * table doesnt need a desc, user would need to enter just null for arg 2 to work
 			 */
 			else if(args[0].equals("createitem")){
-				System.out.println("yep");
 				if(args[1] == null || args[3] == null) {
 					System.out.println("Error in argument numbers");
 					Usage();
@@ -137,7 +136,6 @@ public class Project {
 			}
 			
 			else Usage();
-			System.out.println("shits going here");
 			conn.close();
 			System.out.println();
 			System.out.println("Database connection closed");
