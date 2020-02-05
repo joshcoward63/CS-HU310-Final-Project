@@ -17,15 +17,11 @@ public class Project {
 			Class.forName("com.mysql.cj.jdbc.Driver").getConstructor().newInstance();
 			System.out.println();
 			System.out.println("JDBC driver loaded");
-			conn = makeConnection("58120", "CS310","1234567890");    
+			conn = makeConnection("58120", "Final ","1234567890");    
 			/*
 			 * 
 			 *conditionals
 			 */				
-			if(selectStmt != null) {
-				selectStmt.close();
-			}		
-
 			if(args[0] == "/?") {
 				Usage();
 			}
@@ -33,16 +29,16 @@ public class Project {
 			 * has two different calls one for if there is a desc and one if there isnt
 			 * table doesnt need a desc, user would need to enter just null for arg 2 to work
 			 */
-			else if(args[0].toLowerCase() == "createitem") {
+			else if(args[0].equals("createitem")){
+				System.out.println("yep");
 				if(args[1] == null || args[3] == null) {
 					System.out.println("Error in argument numbers");
 					Usage();
 					return;
 				}
 				if(args[1]!= null && args[2] == null && args[3]!=null) {
-					runQuery(conn,createItem(Integer.parseInt(args[1])," n/a",Double.parseDouble(args[3])));
 				}
-				runQuery(conn,createItem(Integer.parseInt(args[1]), args[2], Double.parseDouble(args[3])));
+				runQuery(conn,createItem(args[1], args[2],args[3]));
 
 			}
 			else if(args[0].toLowerCase() == "createpurchase") {
@@ -64,7 +60,7 @@ public class Project {
 			}
 			else if(args[0].toLowerCase() == "getitems") {
 				if(args[1] == null) {
-					System.out.println("Error in argument numbers");
+					System.out.println("Error in argument numbers 1");
 					Usage();
 					return;
 				}
@@ -139,8 +135,9 @@ public class Project {
 				}
 				runQuery(conn,deletePurchase(Integer.parseInt(args[1])));
 			}
+			
 			else Usage();
-
+			System.out.println("shits going here");
 			conn.close();
 			System.out.println();
 			System.out.println("Database connection closed");
@@ -186,7 +183,7 @@ public class Project {
 		ResultSet rs = null;
 		try {
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery(statement);  // no real code required... just a real db connection
+			 stmt.executeUpdate(statement);  // no real code required... just a real db connection
 			// Now do something with the ResultSet ....
 
 			rs.beforeFirst();
@@ -222,9 +219,9 @@ public class Project {
 	}
 
 
-	public static String createItem(int iCode,String desc, double price) {
-		String stmnt = "Insert into Item(itemCode,itemDescription, price"
-				+ " Values ( " + iCode + ", " + desc + ", " + price +" );";
+	public static String createItem(String iCode,String desc, String price) {
+		String stmnt = "Insert into Item(itemCode,itemDescription, price)"
+				+ " Values ( "+ iCode + ", \'" + desc + "\', " + price +");";
 		return stmnt;
 
 	}
