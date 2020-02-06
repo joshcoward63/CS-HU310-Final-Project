@@ -20,7 +20,8 @@ public class Project {
 			/*
 			 * 
 			 *conditionals
-			 */				
+			 */	
+			int i;			
 			if(args[0] == "/?") {
 				Usage();
 			}
@@ -41,12 +42,8 @@ public class Project {
 
 			}
 			else if(args[0].toLowerCase().equals("createpurchase")) {
-				if (args[1] == null || args[2] == null) {
-					System.out.println("Error in argument numbers");
-					Usage();
-					return;
-
-				}
+				i = 2;
+				argumentCheck(i);
 				runQuery(conn,createPurchase(Integer.parseInt(args[1]),Integer.parseInt(args[2])),false);
 			}
 			else if(args[0].toLowerCase().equals("createshipment")) {
@@ -58,22 +55,16 @@ public class Project {
 				runQuery(conn,createShipment(Integer.parseInt(args[1]),Integer.parseInt(args[2]),Integer.parseInt(args[3])),false);
 			}
 			else if(args[0].toLowerCase().equals("getitems")) {
-				if(args[1] == null) {
-					System.out.println("Error in argument numbers 1");
-					Usage();
-					return;
-				}
+				i = 1;
+				argumentCheck(i);
 				if(args[1].equals("%")) {
 					runQuery(conn,"select * from Item;",true);
 				}
 				runQuery(conn,getItems(Integer.parseInt(args[1])),true);
 			}
 			else if(args[0].toLowerCase().equals("getshipments")) {
-				if(args[1] == null) {
-					System.out.println("Error in argument numbers");
-					Usage();
-					return;
-				}
+				i = 1;
+				argumentCheck(i);
 				if(args[1].equals("%")) {
 					runQuery(conn,"select * from Shipping;",true);
 				}
@@ -81,11 +72,8 @@ public class Project {
 				else runQuery(conn,getShipments(Integer.parseInt(args[1])),true);
 			}
 			else if(args[0].toLowerCase().equals("getpurchase")) {
-				if(args[1] == null) {
-					System.out.println("Error in argument numbers");
-					Usage();
-					return;
-				}
+				i = 1;
+				argumentCheck(i);
 				if(args[1].equals("%")) {
 					runQuery(conn,"select * from Purchase;",true);
 				}
@@ -93,44 +81,29 @@ public class Project {
 
 			}
 			else if(args[0].toLowerCase().equals("itemsavailable")) {
-				if(args[1] == null) {
-					System.out.println("Error in argument numbers");
-					Usage();
-					return;
-				}
+				i = 1;
+				argumentCheck(i);
 				runQuery(conn,itemsAvailable(Integer.parseInt(args[1])),true);
 			}
 			else if(args[0].toLowerCase().equals("updateitem")) {
-				if(args[1] == null || args[2] == null) {
-					System.out.println("Error in argument numbers");
-					Usage();
-					return;
-				}
+				i = 2;
+				argumentCheck(i);
 				runQuery(conn,updateItem(Integer.parseInt(args[1]),Double.parseDouble(args[2])),false);
 			}
 			else if(args[0].toLowerCase().equals("deleteitem")) {
-				if(args[1] == null) {
-					System.out.println("Error in argument numbers");
-					Usage();
-					return;
-				}
+				i = 1;
+				argumentCheck(i);
 				runQuery(conn,deleteItem(Integer.parseInt(args[1])),false);
 
 			}
 			else if(args[0].toLowerCase().equals("deletepurchase")) {
-				if(args[1] == null) {
-					System.out.println("Error in argument numbers");
-					Usage();
-					return;
-				}
+				i = 1;
+				argumentCheck(i);
 				runQuery(conn,deletePurchase(Integer.parseInt(args[1])),false);
 			}
 			else if(args[0].toLowerCase().equals("deleteshipment")) {
-				if(args[1] == null) {
-					System.out.println("Error in argument numbers");
-					Usage();
-					return;
-				}
+				i = 1;
+				argumentCheck(i);
 				runQuery(conn,deletePurchase(Integer.parseInt(args[1])),false);
 			}
 
@@ -218,6 +191,24 @@ public class Project {
 				stmt = null;
 			}
 		}
+	}
+
+	public argumentCheck(int i){
+		if(i == 1){
+			if(args[1] == null) {
+				System.out.println("Error in argument numbers");
+				Usage();
+				return;
+			}
+			else if(i = 2){
+				if(args[1] == null || args[2] == null) {
+					System.out.println("Error in argument numbers");
+					Usage();
+					return;
+				}			
+			}
+		} 
+
 	}
 
 	public static String createItem(String iCode,String desc, String price) {
