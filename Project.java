@@ -251,20 +251,21 @@ public class Project {
 	public static String itemsAvailable(int Code) {
 		return null;
 	}
-	public static String updateItem(int ICode, double price) {	
-		return null;
+	public static String updateItem(int ICode, double price) {
+		String stmnt = "UPDATE Item  SET itemCode = " + ICode +  " price = " + price;	
+		return stmnt;
 	}
 	public static String deleteItem(int iCode) {
-		String deleteItem = "DELETE FROM Item where"  + iCode + ";";
-		return deleteItem;
+		String stmnt = "DELETE FROM Item where itemCode is "  + iCode + ";";
+		return stmnt;
 	}
 	public static String deletePurchase(int pCode) {
-		String deletePurchase = "DELETE FROM Purchase where"  + pCode + ";";
-		return deletePurchase;
+		String stmnt = "DELETE FROM Purchase where purchaseCode is "  + pCode + ";";
+		return stmnt;
 	}
 	public static String deleteShipment(int sCode) {
-		String deleteShipment = "DELETE FROM Shipment where"  + sCode + ";";
-		return deleteShipment;
+		String stmnt = "DELETE FROM Shipment where shipmentCode is "  + sCode + ";";
+		return stmnt;
 	}
 
 	public static void Usage() {
