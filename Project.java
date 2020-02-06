@@ -256,15 +256,15 @@ public class Project {
 		return stmnt;
 	}
 	public static String deleteItem(int iCode) {
-		String stmnt = "DELETE FROM Item where itemCode is "  + iCode + ";";
+		String stmnt = "DELETE FROM Item where itemCode = "  + iCode + ";";
 		return stmnt;
 	}
 	public static String deletePurchase(int pCode) {
-		String stmnt = "DELETE FROM Purchase where purchaseCode is "  + pCode + ";";
+		String stmnt = "DELETE FROM Purchase where purchaseCode = "  + pCode + ";";
 		return stmnt;
 	}
 	public static String deleteShipment(int sCode) {
-		String stmnt = "DELETE FROM Shipment where shipmentCode is "  + sCode + ";";
+		String stmnt = "DELETE FROM Shipment where shipmentCode = "  + sCode + ";";
 		return stmnt;
 	}
 
