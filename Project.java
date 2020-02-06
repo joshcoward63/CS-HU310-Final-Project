@@ -106,7 +106,7 @@ public class Project {
 					Usage();
 					return;
 				}
-				runQuery(conn,updateItem(Integer.parseInt(args[1]),Double.parseDouble(args[2])),true);
+				runQuery(conn,updateItem(Integer.parseInt(args[1]),Double.parseDouble(args[2])),false);
 			}
 			else if(args[0].toLowerCase().equals("deleteitem")) {
 				if(args[1] == null) {
@@ -251,8 +251,8 @@ public class Project {
 	public static String itemsAvailable(int Code) {
 		return null;
 	}
-	public static String updateItem(int ICode, double price) {
-		String stmnt = "UPDATE Item  SET itemCode = " + ICode +  " price = " + price;	
+	public static String updateItem(int iCode, double price) {
+		String stmnt = "UPDATE Item SET price = " + price + " where itemCode = " + iCode;		
 		return stmnt;
 	}
 	public static String deleteItem(int iCode) {
