@@ -11,7 +11,6 @@ public class Project {
 		/*
 		 * things to set up database conection
 		 */
-		Statement selectStmt = null;
 		Connection conn = null;  
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver").getConstructor().newInstance();
@@ -29,7 +28,8 @@ public class Project {
 			 * has two different calls one for if there is a desc and one if there isnt
 			 * table doesnt need a desc, user would need to enter just null for arg 2 to work
 			 */
-			else if(args[0].equals("createitem")){
+			else if(args[0].toLowerCase().equals("createitem")){
+				System.out.println("yep");
 				if(args[1] == null || args[3] == null) {
 					System.out.println("Error in argument numbers");
 					Usage();
@@ -37,104 +37,103 @@ public class Project {
 				}
 				if(args[1]!= null && args[2] == null && args[3]!=null) {
 				}
-				runQuery(conn,createItem(args[1], args[2],args[3]));
+				runQuery(conn,createItem(args[1], args[2],args[3]),false);
 
 			}
-			else if(args[0].toLowerCase() == "createpurchase") {
+			else if(args[0].toLowerCase().equals("createpurchase")) {
 				if (args[1] == null || args[2] == null) {
 					System.out.println("Error in argument numbers");
 					Usage();
 					return;
 
 				}
-				runQuery(conn,createPurchase(Integer.parseInt(args[1]),Integer.parseInt(args[2])));
+				runQuery(conn,createPurchase(Integer.parseInt(args[1]),Integer.parseInt(args[2])),false);
 			}
-			else if(args[0].toLowerCase() == "createshipment") {
+			else if(args[0].toLowerCase().equals("createshipment")) {
 				if(args[1] == null || args[2] == null || args[3] == null) {
 					System.out.println("Error in argument numbers");
 					Usage();
 					return;
 				}
-				runQuery(conn,createShipment(Integer.parseInt(args[1]),Integer.parseInt(args[2]),Integer.parseInt(args[3])));
+				runQuery(conn,createShipment(Integer.parseInt(args[1]),Integer.parseInt(args[2]),Integer.parseInt(args[3])),false);
 			}
-			else if(args[0].toLowerCase() == "getitems") {
+			else if(args[0].toLowerCase().equals("getitems")) {
 				if(args[1] == null) {
 					System.out.println("Error in argument numbers 1");
 					Usage();
 					return;
 				}
-				if(args[1] == "%") {
-					runQuery(conn,"select * from Item;");
+				if(args[1].equals("%")) {
+					runQuery(conn,"select * from Item;",true);
 				}
-				runQuery(conn,getItems(Integer.parseInt(args[1])));
-
-
+				runQuery(conn,getItems(Integer.parseInt(args[1])),true);
 			}
-			else if(args[0].toLowerCase() == "getshipments") {
+			else if(args[0].toLowerCase().equals("getshipments")) {
 				if(args[1] == null) {
 					System.out.println("Error in argument numbers");
 					Usage();
 					return;
 				}
-				if(args[1] == "%") {
-					runQuery(conn,"select * from Shipping;");
+				if(args[1].equals("%")) {
+					runQuery(conn,"select * from Shipping;",true);
 				}
-				runQuery(conn,getShipments(Integer.parseInt(args[1])));
+
+				else runQuery(conn,getShipments(Integer.parseInt(args[1])),true);
 			}
-			else if(args[0].toLowerCase() == "getpurchase") {
+			else if(args[0].toLowerCase().equals("getpurchase")) {
 				if(args[1] == null) {
 					System.out.println("Error in argument numbers");
 					Usage();
 					return;
 				}
-				if(args[1] == "%") {
-					runQuery(conn,"select * from Purchase;");
+				if(args[1].equals("%")) {
+					runQuery(conn,"select * from Purchase;",true);
 				}
-				runQuery(conn,getShipments(Integer.parseInt(args[1])));
+				runQuery(conn,getShipments(Integer.parseInt(args[1])),true);
 
 			}
-			else if(args[0].toLowerCase() == "itemsavailable") {
+			else if(args[0].toLowerCase().equals("itemsavailable")) {
 				if(args[1] == null) {
 					System.out.println("Error in argument numbers");
 					Usage();
 					return;
 				}
-				runQuery(conn,itemsAvailable(Integer.parseInt(args[1])));
+				runQuery(conn,itemsAvailable(Integer.parseInt(args[1])),true);
 			}
-			else if(args[0].toLowerCase() == "updateitem") {
+			else if(args[0].toLowerCase().equals("updateitem")) {
 				if(args[1] == null || args[2] == null) {
 					System.out.println("Error in argument numbers");
 					Usage();
 					return;
 				}
-				runQuery(conn,updateItem(Integer.parseInt(args[1]),Double.parseDouble(args[2])));
+				runQuery(conn,updateItem(Integer.parseInt(args[1]),Double.parseDouble(args[2])),true);
 			}
-			else if(args[0].toLowerCase() == "deleteitem") {
+			else if(args[0].toLowerCase().equals("deleteitem")) {
 				if(args[1] == null) {
 					System.out.println("Error in argument numbers");
 					Usage();
 					return;
 				}
-				runQuery(conn,deleteItem(Integer.parseInt(args[1])));
+				runQuery(conn,deleteItem(Integer.parseInt(args[1])),false);
 
 			}
-			else if(args[0].toLowerCase() == "deletepurchase") {
+			else if(args[0].toLowerCase().equals("deletepurchase")) {
 				if(args[1] == null) {
 					System.out.println("Error in argument numbers");
 					Usage();
 					return;
 				}
-				runQuery(conn,deletePurchase(Integer.parseInt(args[1])));
+				runQuery(conn,deletePurchase(Integer.parseInt(args[1])),false);
 			}
-			else if(args[0].toLowerCase() == "deleteshipment") {
+			else if(args[0].toLowerCase().equals("deleteshipment")) {
 				if(args[1] == null) {
 					System.out.println("Error in argument numbers");
 					Usage();
 					return;
 				}
-				runQuery(conn,deletePurchase(Integer.parseInt(args[1])));
+				runQuery(conn,deletePurchase(Integer.parseInt(args[1])),false);
 			}
-			
+
 			else Usage();
 			conn.close();
 			System.out.println();
@@ -176,14 +175,19 @@ public class Project {
 	}
 
 	//Used to create/run querys
-	public static void runQuery(Connection conn,String statement) {
+	public static void runQuery(Connection conn,String statement,boolean select) {
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
-			stmt = conn.createStatement();
-			 stmt.executeUpdate(statement);  // no real code required... just a real db connection
-			// Now do something with the ResultSet ....
-
+			if(select == true) {
+				stmt = conn.createStatement();
+				rs = stmt.executeQuery(statement);
+			}
+			else {
+				stmt = conn.createStatement();
+				stmt.executeUpdate(statement);  // no real code required... just a real db connection
+				// Now do something with the ResultSet ....
+			}
 			rs.beforeFirst();
 			while (rs.next()) {
 				System.out.println(rs.getInt(1) 
@@ -216,7 +220,6 @@ public class Project {
 		}
 	}
 
-
 	public static String createItem(String iCode,String desc, String price) {
 		String stmnt = "Insert into Item(itemCode,itemDescription, price)"
 				+ " Values ( "+ iCode + ", \'" + desc + "\', " + price +");";
@@ -229,12 +232,12 @@ public class Project {
 		return stmnt;
 	}
 	public static String createShipment(int sCode,int shipQ, int shipDate) {
-		String stmnt = "Insert into Shipment ";
+		String stmnt = "Insert into shipping(itemID, quantity, shippingDate) values(" + sCode + ", "+ shipQ + ", "+ shipDate + ");"; 
 		return stmnt;
 
 	}
 	public static String getItems(int iCode) {
-		String stmnt = "Select itemCode from Items where itemCode = \' " + iCode + "\' "; 
+		String stmnt = "Select itemCode from Item where itemCode = \' " + iCode + "\' "; 
 		return stmnt;
 	}
 	public static String getShipments(int sCode) {
@@ -242,7 +245,7 @@ public class Project {
 		return stmnt;
 	}
 	public String getPurchases(int pCode) {
-		String stmnt = "Select itemID from Purchases where itemID = \'" + pCode + "\';";
+		String stmnt = "Select itemID from Purchase where itemID = \'" + pCode + "\';";
 		return stmnt;
 	}
 	public static String itemsAvailable(int Code) {
