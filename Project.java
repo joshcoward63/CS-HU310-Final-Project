@@ -21,7 +21,8 @@ public class Project {
 			 * 
 			 *conditionals
 			 */	
-			int i;			
+
+			int i; // used to keep track of number of arguments			
 			if(args[0] == "/?") {
 				Usage();
 			}
@@ -200,11 +201,11 @@ public class Project {
 				Usage();
 				return;
 			}
-			else if(i = 2){
-				if(args[1] == null || args[2] == null) {
-					System.out.println("Error in argument numbers");
-					Usage();
-					return;
+		else if(i = 2){
+			if(args[1] == null || args[2] == null) {
+				System.out.println("Error in argument numbers");
+				Usage();
+				return;
 				}			
 			}
 		} 
