@@ -53,7 +53,7 @@ public class Project {
 					Usage();
 					return;
 				}
-				runQuery(conn,createShipment(Integer.parseInt(args[1]),Integer.parseInt(args[2]),Integer.parseInt(args[3])),false);
+				runQuery(conn,createShipment(Integer.parseInt(args[1]),Integer.parseInt(args[2]),args[3]),false);
 			}
 			else if(args[0].toLowerCase().equals("getitems")) {
 				i = 1;
@@ -61,8 +61,10 @@ public class Project {
 				if(args[1].equals("%")) {
 					runQuery(conn,"select * from Item;",true);
 				}
+        else{
 				runQuery(conn,getItems(Integer.parseInt(args[1])),true);
 			}
+      }
 			else if(args[0].toLowerCase().equals("getshipments")) {
 				i = 1;
 				argumentCheck(i,args[1],"null");
@@ -72,13 +74,13 @@ public class Project {
 
 				else runQuery(conn,getShipments(Integer.parseInt(args[1])),true);
 			}
-			else if(args[0].toLowerCase().equals("getpurchase")) {
+			else if(args[0].toLowerCase().equals("getpurchases")) {
 				i = 1;
 				argumentCheck(i,args[1],"null");
 				if(args[1].equals("%")) {
 					runQuery(conn,"select * from Purchase;",true);
 				}
-				runQuery(conn,getShipments(Integer.parseInt(args[1])),true);
+			else	runQuery(conn,getShipments(Integer.parseInt(args[1])),true);
 
 			}
 			else if(args[0].toLowerCase().equals("itemsavailable")) {
@@ -219,17 +221,17 @@ public class Project {
 
 	}
 	public static String createPurchase(int pCode, int quantity) {
-		String stmnt = "Insert into Purchases(purchaseCode,Quantity) "
+		String stmnt = "Insert into Purchase(itemID,Quantity) "
 				+ "Values (" + pCode + ", " + quantity + ");";
 		return stmnt;
 	}
-	public static String createShipment(int sCode,int shipQ, int shipDate) {
-		String stmnt = "Insert into shipping(itemID, quantity, shippingDate) values(" + sCode + ", "+ shipQ + ", "+ shipDate + ");"; 
+	public static String createShipment(int sCode,int shipQ, String shipDate) {
+		String stmnt = "Insert into Shipping(itemID, quantity, shippingDate) values(" + sCode + ", "+ shipQ + ", \'"+ shipDate + "\');"; 
 		return stmnt;
 
 	}
 	public static String getItems(int iCode) {
-		String stmnt = "Select itemCode from Item where itemCode = \' " + iCode + "\' "; 
+		String stmnt = "Select * from Item where itemCode = \'" + iCode + "\';"; 
 		return stmnt;
 	}
 	public static String getShipments(int sCode) {
