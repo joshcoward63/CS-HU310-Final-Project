@@ -87,7 +87,7 @@ public class Project {
 				i = 1;
 				argumentCheck(i,args[1],"null");
 				if(args[1].equals("%")){
-					runQuery(conn, "call ItemsAvailable2();", true);
+					runQuery(conn, "call itemsAvailable2();", true);
 				}else{
 					runQuery(conn,itemsAvailable(Integer.parseInt(args[1])),true);
 				}
