@@ -234,8 +234,7 @@ public class Project {
 
 	}
 	public static String createPurchase(String pCode, int quantity) {
-		String stmnt = "Insert into Purchase(itemID,Quantity) "
-				+ "Values ('" + pCode + "', " + quantity + ");";
+		String stmnt = "call createPurchase('" + pCode + "', " + quantity + ");";
 		return stmnt;
 	}
 	public static String createShipment(String sCode,int shipQ, String shipDate) {
