@@ -47,7 +47,7 @@ public class Project {
 			else if(args[0].toLowerCase().equals("createpurchase")) {
 				i = 2;
 				argumentCheck(i,args[1],args[2]);
-				runQuery(conn,createPurchase(Integer.parseInt(args[1]),Integer.parseInt(args[2])),false);
+				runQuery(conn,createPurchase(args[1],Integer.parseInt(args[2])),false);
 			}
 			else if(args[0].toLowerCase().equals("createshipment")) {
 				if(args[1] == null || args[2] == null || args[3] == null) {
@@ -233,9 +233,9 @@ public class Project {
 		return stmnt;
 
 	}
-	public static String createPurchase(int pCode, int quantity) {
+	public static String createPurchase(String pCode, int quantity) {
 		String stmnt = "Insert into Purchase(itemID,Quantity) "
-				+ "Values (" + pCode + ", " + quantity + ");";
+				+ "Values ('" + pCode + "', " + quantity + ");";
 		return stmnt;
 	}
 	public static String createShipment(String sCode,int shipQ, String shipDate) {
