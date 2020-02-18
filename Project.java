@@ -239,7 +239,7 @@ public class Project {
 		return stmnt;
 	}
 	public static String createShipment(String sCode,int shipQ, String shipDate) {
-		String stmnt = "Insert into Shipping(itemID, quantity, shippingDate) values(" + sCode + ", "+ shipQ + ", \'"+ shipDate + "\');"; 
+		String stmnt = "call CreateShipment(" + sCode + ", "+ shipQ + ", \'"+ shipDate + "\');"; 
 		return stmnt;
 
 	}
