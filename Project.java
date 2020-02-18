@@ -171,11 +171,13 @@ public class Project {
 			rs.beforeFirst();
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int columnsNumber = rsmd.getColumnCount();
-			String name;
+			for(int i = 1; i <= columnsNumber; i++){
+				name = rsmd.getColumnName(i);				
+				System.out.print(name + " ");				
+      		}
+      		System.out.println();
 			while (rs.next()) {
 				for(int i = 1; i < columnsNumber + 1; i++)
-				name = rsmd.getColumnName(i);
-				System.out.println(name);
 					System.out.print(rs.getString(i) + " ");
 				System.out.println();
 			}
