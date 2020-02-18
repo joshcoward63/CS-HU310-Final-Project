@@ -31,8 +31,10 @@ public class Project {
 			 * table doesnt need a desc, user would need to enter just null for arg 2 to work
 			 */
 			else if(args[0].toLowerCase().equals("createitem")){
-				System.out.println("yep");
-				if(args[1] == null || args[3] == null) {
+				if(args.length < 4){
+					Usage();
+							}				
+				if(args[1] == null || args[2] == null || args[3] == null) {
 					System.out.println("Error in argument numbers");
 					Usage();
 					return;
@@ -221,13 +223,13 @@ public class Project {
 				return;
 				}			
 			}
+
 		} 
 
 	}
-
 	public static String createItem(String iCode,String desc, String price) {
 		String stmnt = "Insert into Item(itemCode,itemDescription, price)"
-				+ " Values ( "+ iCode + ", \'" + desc + "\', " + price +");";
+				+ " Values ( '" + iCode + " \', " + desc + "\', " + price +");";
 		return stmnt;
 
 	}
