@@ -55,7 +55,7 @@ public class Project {
 					Usage();
 					return;
 				}
-				runQuery(conn,createShipment(Integer.parseInt(args[1]),Integer.parseInt(args[2]),args[3]),false);
+				runQuery(conn,createShipment(args[1],Integer.parseInt(args[2]),args[3]),false);
 			}
 			else if(args[0].toLowerCase().equals("getitems")) {
 				i = 1;
@@ -238,7 +238,7 @@ public class Project {
 				+ "Values (" + pCode + ", " + quantity + ");";
 		return stmnt;
 	}
-	public static String createShipment(int sCode,int shipQ, String shipDate) {
+	public static String createShipment(String sCode,int shipQ, String shipDate) {
 		String stmnt = "Insert into Shipping(itemID, quantity, shippingDate) values(" + sCode + ", "+ shipQ + ", \'"+ shipDate + "\');"; 
 		return stmnt;
 
