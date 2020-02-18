@@ -169,11 +169,13 @@ public class Project {
 				// Now do something with the ResultSet ....
 			}
 			rs.beforeFirst();
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int columnsNumber = rsmd.getColumnCount();
+			
 			while (rs.next()) {
-				System.out.println(rs.getInt(1) 
-						+ ":" + rs.getString(2) 
-						+ ":" + rs.getString(3) 
-						+ ":" + rs.getString(4));
+				for(int i = 1; i < columnsNumber + 1; i++)
+					System.out.print(rs.getString(i) + " ");
+				System.out.println();
 			}
 		} catch (SQLException ex) {
 			// handle any errors
