@@ -74,7 +74,7 @@ public class Project {
 					runQuery(conn,"select * from Shipping;",true);
 				}
 
-				else runQuery(conn,getShipments(Integer.parseInt(args[1])),true);
+				else runQuery(conn,getShipments(args[1]),true);
 			}
 			else if(args[0].toLowerCase().equals("getpurchases")) {
 				i = 1;
@@ -82,7 +82,7 @@ public class Project {
 				if(args[1].equals("%")) {
 					runQuery(conn,"select * from Purchase;",true);
 				}
-			else	runQuery(conn,getShipments(Integer.parseInt(args[1])),true);
+			else	runQuery(conn,getShipments(args[1]),true);
 
 			}
 			else if(args[0].toLowerCase().equals("itemsavailable")) {
@@ -246,11 +246,11 @@ public class Project {
 		String stmnt = "Select * from Item where itemCode = '" + iCode + "';"; 
 		return stmnt;
 	}
-	public static String getShipments(int sCode) {
+	public static String getShipments(String sCode) {
 		String stmnt = "Select * from Shipping where itemID = \'" + sCode + "\';";
 		return stmnt;
 	}
-	public String getPurchases(int pCode) {
+	public String getPurchases(String pCode) {
 		String stmnt = "Select itemID from Purchase where itemID = \'" + pCode + "\';";
 		return stmnt;
 	}
