@@ -86,7 +86,11 @@ public class Project {
 			else if(args[0].toLowerCase().equals("itemsavailable")) {
 				i = 1;
 				argumentCheck(i,args[1],"null");
-				runQuery(conn,itemsAvailable(Integer.parseInt(args[1])),true);
+				if(args[1].equals("%")){
+					runQuery(conn, "call ItemsAvailable2();", true);
+				}else{
+					runQuery(conn,itemsAvailable(Integer.parseInt(args[1])),true);
+				}
 			}
 			else if(args[0].toLowerCase().equals("updateitem")) {
 				i = 2;
