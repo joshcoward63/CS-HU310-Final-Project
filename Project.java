@@ -242,8 +242,9 @@ public class Project {
 		String stmnt = "Select itemID from Purchase where itemID = \'" + pCode + "\';";
 		return stmnt;
 	}
-	public static String itemsAvailable(int Code) {
-		return null;
+	public static String itemsAvailable(int iCode) {
+		String stmnt = "call itemsAvailable(" + Code + ");";
+		return stmnt;
 	}
 	public static String updateItem(int iCode, double price) {
 		String stmnt = "UPDATE Item SET price = " + price + " where itemCode = " + iCode;		
@@ -251,7 +252,7 @@ public class Project {
 	}
 	public static String deleteItem(int iCode) {
 		String stmnt = "DELETE FROM Item where itemCode = "  + iCode + ";";
-		return stmnt;
+		return call;
 	}
 	public static String deletePurchase(int pCode) {
 		String stmnt = "DELETE FROM Purchase where purchaseCode = "  + pCode + ";";
