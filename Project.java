@@ -256,7 +256,7 @@ public class Project {
 	}
 	public static String deleteItem(int iCode) {
 		String stmnt = "DELETE FROM Item where itemCode = "  + iCode + ";";
-		return call;
+		return stmnt;
 	}
 	public static String deletePurchase(int pCode) {
 		String stmnt = "DELETE FROM Purchase where purchaseCode = "  + pCode + ";";
