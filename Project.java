@@ -64,7 +64,7 @@ public class Project {
 					runQuery(conn,"select * from Item;",true);
 				}
         else{
-				runQuery(conn,getItems(Integer.parseInt(args[1])),true);
+				runQuery(conn,getItems(args[1]),true);
 			}
       }
 			else if(args[0].toLowerCase().equals("getshipments")) {
@@ -242,8 +242,8 @@ public class Project {
 		return stmnt;
 
 	}
-	public static String getItems(int iCode) {
-		String stmnt = "Select * from Item where itemCode = \'" + iCode + "\';"; 
+	public static String getItems(String iCode) {
+		String stmnt = "Select * from Item where itemCode = '" + iCode + "';"; 
 		return stmnt;
 	}
 	public static String getShipments(int sCode) {
