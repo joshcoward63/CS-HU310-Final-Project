@@ -171,6 +171,7 @@ public class Project {
 			rs.beforeFirst();
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int columnsNumber = rsmd.getColumnCount();
+			String name;
 			for(int i = 1; i <= columnsNumber; i++){
 				name = rsmd.getColumnName(i);				
 				System.out.print(name + " ");				
