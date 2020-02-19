@@ -255,7 +255,7 @@ public class Project {
 		return stmnt;
 	}
 	public static String itemsAvailable(String iCode) {
-		String stmnt = "call itemsAvailable(" + iCode + ");";
+		String stmnt = "call itemsAvailable('" + iCode + "');";
 		return stmnt;
 	}
 	public static String updateItem(String iCode, double price) {
