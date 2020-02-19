@@ -259,7 +259,7 @@ public class Project {
 		return stmnt;
 	}
 	public static String updateItem(String iCode, double price) {
-		String stmnt = "UPDATE Item SET price = " + price + " where itemCode = " + iCode;		
+		String stmnt = "UPDATE Item SET price = " + price + " where itemCode = " + iCode + ";";		
 		return stmnt;
 	}
 	public static String deleteItem(String iCode) {
