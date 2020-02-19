@@ -82,7 +82,7 @@ public class Project {
 				if(args[1].equals("%")) {
 					runQuery(conn,"select * from Purchase;",true);
 				}
-			else	runQuery(conn,getShipments(args[1]),true);
+			else	runQuery(conn,getPurchases(args[1]),true);
 
 			}
 			else if(args[0].toLowerCase().equals("itemsavailable")) {
