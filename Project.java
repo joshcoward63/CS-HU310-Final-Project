@@ -247,11 +247,11 @@ public class Project {
 		return stmnt;
 	}
 	public static String getShipments(String sCode) {
-		String stmnt = "Select * from Shipping where itemID = \'" + sCode + "\';";
+		String stmnt = "call GetShipments('" + sCode + "');";
 		return stmnt;
 	}
 	public String getPurchases(String pCode) {
-		String stmnt = "Select itemID from Purchase where itemID = \'" + pCode + "\';";
+		String stmnt = "call GetPurchases('" + pCode + "');";
 		return stmnt;
 	}
 	public static String itemsAvailable(int iCode) {
