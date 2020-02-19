@@ -91,29 +91,29 @@ public class Project {
 				if(args[1].equals("%")){
 					runQuery(conn, "call itemsAvailable2();", true);
 				}else{
-					runQuery(conn,itemsAvailable(Integer.parseInt(args[1])),true);
+					runQuery(conn,itemsAvailable(args[1]),true);
 				}
 			}
 			else if(args[0].toLowerCase().equals("updateitem")) {
 				i = 2;
 				argumentCheck(i,args[1],args[2]);
-				runQuery(conn,updateItem(Integer.parseInt(args[1]),Double.parseDouble(args[2])),false);
+				runQuery(conn,updateItem(args[1],Double.parseDouble(args[2])),false);
 			}
 			else if(args[0].toLowerCase().equals("deleteitem")) {
 				i = 1;
 				argumentCheck(i,args[1],"null");
-				runQuery(conn,deleteItem(Integer.parseInt(args[1])),false);
+				runQuery(conn,deleteItem(args[1]),false);
 
 			}
 			else if(args[0].toLowerCase().equals("deletepurchase")) {
 				i = 1;
 				argumentCheck(i,args[1],"null");
-				runQuery(conn,deletePurchase(Integer.parseInt(args[1])),false);
+				runQuery(conn,deletePurchase(args[1]),false);
 			}
 			else if(args[0].toLowerCase().equals("deleteshipment")) {
 				i = 1;
 				argumentCheck(i,args[1],"null");
-				runQuery(conn,deletePurchase(Integer.parseInt(args[1])),false);
+				runQuery(conn,deletePurchase(args[1]),false);
 			}
 
 			else Usage();
@@ -254,23 +254,23 @@ public class Project {
 		String stmnt = "call GetPurchases('" + pCode + "');";
 		return stmnt;
 	}
-	public static String itemsAvailable(int iCode) {
+	public static String itemsAvailable(String iCode) {
 		String stmnt = "call itemsAvailable(" + iCode + ");";
 		return stmnt;
 	}
-	public static String updateItem(int iCode, double price) {
+	public static String updateItem(String iCode, double price) {
 		String stmnt = "UPDATE Item SET price = " + price + " where itemCode = " + iCode;		
 		return stmnt;
 	}
-	public static String deleteItem(int iCode) {
+	public static String deleteItem(String iCode) {
 		String stmnt = "DELETE FROM Item where itemCode = "  + iCode + ";";
 		return stmnt;
 	}
-	public static String deletePurchase(int pCode) {
+	public static String deletePurchase(String pCode) {
 		String stmnt = "DELETE FROM Purchase where purchaseCode = "  + pCode + ";";
 		return stmnt;
 	}
-	public static String deleteShipment(int sCode) {
+	public static String deleteShipment(String sCode) {
 		String stmnt = "DELETE FROM Shipment where shipmentCode = "  + sCode + ";";
 		return stmnt;
 	}
