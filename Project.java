@@ -229,7 +229,7 @@ public class Project {
 	}
 	public static String createItem(String iCode,String desc, String price) {
 		String stmnt = "Insert into Item(itemCode,itemDescription, price)"
-				+ " Values ( '" + iCode + " \', " + desc + "\', " + price +");";
+				+ " Values ( '" + iCode + "', '" + desc + "', " + price +");";
 		return stmnt;
 
 	}
