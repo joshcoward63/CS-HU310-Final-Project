@@ -267,11 +267,11 @@ public class Project {
 		return stmnt;
 	}
 	public static String deletePurchase(String pCode) {
-		String stmnt = "DELETE FROM Purchase where purchaseCode = '"  + pCode + "';";
+		String stmnt = "call DeletePurchase('"  + pCode + "');";
 		return stmnt;
 	}
 	public static String deleteShipment(String sCode) {
-		String stmnt = "DELETE FROM Shipment where shipmentCode = '"  + sCode + "';";
+		String stmnt = "Call DeleteShipment('"  + sCode + "');";
 		return stmnt;
 	}
 
