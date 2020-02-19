@@ -250,7 +250,7 @@ public class Project {
 		String stmnt = "call GetShipments('" + sCode + "');";
 		return stmnt;
 	}
-	public String getPurchases(String pCode) {
+	public static String getPurchases(String pCode) {
 		String stmnt = "call GetPurchases('" + pCode + "');";
 		return stmnt;
 	}
