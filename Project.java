@@ -263,15 +263,15 @@ public class Project {
 		return stmnt;
 	}
 	public static String deleteItem(String iCode) {
-		String stmnt = "DELETE FROM Item where itemCode = "  + iCode + ";";
+		String stmnt = "DELETE FROM Item where itemCode = '"  + iCode + "';";
 		return stmnt;
 	}
 	public static String deletePurchase(String pCode) {
-		String stmnt = "DELETE FROM Purchase where purchaseCode = "  + pCode + ";";
+		String stmnt = "DELETE FROM Purchase where purchaseCode = '"  + pCode + "';";
 		return stmnt;
 	}
 	public static String deleteShipment(String sCode) {
-		String stmnt = "DELETE FROM Shipment where shipmentCode = "  + sCode + ";";
+		String stmnt = "DELETE FROM Shipment where shipmentCode = '"  + sCode + "';";
 		return stmnt;
 	}
 
