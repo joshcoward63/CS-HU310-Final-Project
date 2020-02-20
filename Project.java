@@ -71,7 +71,7 @@ public class Project {
 				i = 1;
 				argumentCheck(i,args[1],"null");
 				if(args[1].equals("%")) {
-					runQuery(conn,"select * from Shipping;",true);
+					runQuery(conn,"select * from Shipment;",true);
 				}
 
 				else runQuery(conn,getShipments(args[1]),true);
